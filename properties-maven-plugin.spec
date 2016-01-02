@@ -1,9 +1,12 @@
+%{?_javapackages_macros:%_javapackages_macros}
+
 %global namedreltag -alpha-2
 %global namedversion %{version}%{?namedreltag}
 Name:          properties-maven-plugin
 Version:       1.0
-Release:       0.9.alpha2%{?dist}
+Release:       0.9.alpha2.1
 Summary:       Properties Maven Plugin
+Group:		Development/Java
 License:       ASL 2.0
 URL:           http://mojo.codehaus.org/properties-maven-plugin/
 # svn export http://svn.codehaus.org/mojo/tags/properties-maven-plugin-1.0-alpha-2/
@@ -40,6 +43,9 @@ This package contains javadoc for %{name}.
 %prep
 %setup -q -n %{name}-%{namedversion}
 
+# - not allowed in EVR
+sed -i 's|<version>1.0-alpha-2</version>|<version>1.0_alpha_2</version>|' pom.xml
+
 # use maven 3.x apis
 sed -i "s|maven-project|maven-core|" pom.xml
 
@@ -56,37 +62,8 @@ sed -i 's/\r//' LICENSE-2.0.txt
 %mvn_install
 
 %files -f .mfiles
-%license LICENSE-2.0.txt
+%doc LICENSE-2.0.txt
 
 %files javadoc -f .mfiles-javadoc
-%license LICENSE-2.0.txt
+%doc LICENSE-2.0.txt
 
-%changelog
-* Wed Feb 11 2015 gil cattaneo <puntogil@libero.it> 1.0-0.9.alpha2
-- introduce license macro
-
-* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.0-0.8.alpha2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
-
-* Fri Mar 28 2014 Michael Simacek <msimacek@redhat.com> - 1.0-0.7.alpha2
-- Use Requires: java-headless rebuild (#1067528)
-
-* Sun Aug 04 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.0-0.6.alpha2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
-
-* Wed Jul 03 2013 gil cattaneo <puntogil@libero.it> 1.0-0.5.alpha2
-- switch to XMvn
-- minor changes to adapt to current guideline
-
-* Thu Feb 14 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.0-0.4.alpha2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
-
-* Wed Feb 06 2013 Java SIG <java-devel@lists.fedoraproject.org> - 1.0-0.3.alpha2
-- Update for https://fedoraproject.org/wiki/Fedora_19_Maven_Rebuild
-- Replace maven BuildRequires with maven-local
-
-* Sat Jul 21 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.0-0.2.alpha2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
-
-* Mon Jun 04 2012 gil cattaneo <puntogil@libero.it> 1.0-0.1.alpha2
-- initial rpm
