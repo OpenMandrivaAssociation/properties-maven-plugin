@@ -8,7 +8,7 @@ Release:       0.9.alpha2.1
 Summary:       Properties Maven Plugin
 Group:		Development/Java
 License:       ASL 2.0
-URL:           http://mojo.codehaus.org/properties-maven-plugin/
+URL:           https://mojo.codehaus.org/properties-maven-plugin/
 # svn export http://svn.codehaus.org/mojo/tags/properties-maven-plugin-1.0-alpha-2/
 # tar czf properties-maven-plugin-1.0-alpha-2-src-svn.tar.gz properties-maven-plugin-1.0-alpha-2
 Source0:       %{name}-%{namedversion}-src-svn.tar.gz
